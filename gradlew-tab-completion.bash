@@ -1,11 +1,12 @@
 # run this whenever there is a new task added or a task is removed from gradle
-setupTasksList() {
+setupGradleTasksList() {
     local tasks_file="$HOME/.gradleTasksList"
 
     if [[ -x ./gradlew ]]; then
         ./gradlew --no-color --quiet tasks | grep ' - ' | awk '{print $1}' | tr '\n' ' ' > $tasks_file
+	printf "Done!\n"
     else
-        printf "Error: No gradlew in this folder. \nPlease run setupTasksList from a folder that contains a gradlew executable\n" 1>&2
+        printf "Error: No gradlew in this folder. \nPlease run setupGradleTasksList from a folder that contains a gradlew executable\n" 1>&2
         return 1
     fi
 }
@@ -17,7 +18,7 @@ _gradle() {
     local tasks_file="$HOME/.gradleTasksList"
 
     if [[ ! -f $tasks_file ]]; then
-        setupTasksList
+        setupGradleTasksList
     fi
 
     tasks=$(cat $tasks_file)
