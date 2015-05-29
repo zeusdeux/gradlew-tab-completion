@@ -21,4 +21,6 @@ That's it, really.
 
 ## Limitations
 
-This auto completion script can't really give you completions across multiple projects (yet).
+- This auto completion script can't really give you completions across multiple projects (yet).
+- The first run takes a bit long since it runs `./gradlew tasks` the first time to parse out the actual tasks
+- It doesn't give you updated completions if a new task is added, deleted or if some task is renamed until you run `setupGradleTasksList` again
